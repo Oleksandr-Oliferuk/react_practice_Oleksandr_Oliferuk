@@ -1,16 +1,15 @@
-export const Button = ({name, onClick, className }) => {
+export const Button = ({ name, onClick, className }) => {
   return (
     <a
       data-cy="Category"
       className={className}
       href="#/"
-      onClick={(e) => {
+      onClick={e => {
         e.preventDefault();
         onClick();
       }}
-
     >
-        {name}
-      </a>
-  )
-}
+      {name}
+    </a>
+  );
+};

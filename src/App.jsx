@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
-import { useState } from "react";
+import { useState } from 'react';
 
 import './App.scss';
 
@@ -24,52 +24,62 @@ const products = productsFromServer.map(product => {
   };
 });
 
-
 function preparedProducts(data, sortFilterdName, selectedCategories, query) {
   let readyDataOfProducts = [...data];
 
   if (selectedCategories.length > 0) {
     readyDataOfProducts = readyDataOfProducts.filter(product =>
-      selectedCategories.includes(product.categoryName)
+      selectedCategories.includes(product.categoryName),
     );
   }
 
-  if (query.trim() !== "") {
+  if (query.trim() !== '') {
     const lowerQuery = query.toLowerCase();
+
     readyDataOfProducts = readyDataOfProducts.filter(
-      (product) =>
+      product =>
         product.categoryName.toLowerCase().includes(lowerQuery) ||
-        product.userName.toLowerCase().includes(lowerQuery)
+        product.userName.toLowerCase().includes(lowerQuery),
     );
   }
 
   return readyDataOfProducts;
 }
 
-
 export const App = () => {
-
-  const [sortFilterdName, setFilterName] = useState("All");
+  const [sortFilterdName, setFilterName] = useState('All');
   const [selectedCategories, setSelectedCategories] = useState([]);
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
 
-  const visibleProducts = preparedProducts(products, sortFilterdName, selectedCategories, query);
+  const visibleProducts = preparedProducts(
+    products,
+    sortFilterdName,
+    selectedCategories,
+    query,
+  );
 
-  const handlerClickGroupBy = (categoryName) => {
-    setSelectedCategories(prev => {
-      if (prev.includes(categoryName)) {
-        return prev.filter(c => c !== categoryName);
-      } else {
-        return [...prev, categoryName];
-      }
-    });
-  };
+const handlerClickGroupBy = (categoryName) => {
+  if (categoryName === "All") {
+    setSelectedCategories([]);
+    return;
+  }
 
-  const handlerClickName = (value) => {
+  setSelectedCategories(prev => {
+    if (prev.includes(categoryName)) {
+      return prev.filter(c => c !== categoryName);
+    } else {
+      return [...prev, categoryName];
+    }
+  });
+};
+
+
+
+  const handlerClickName = value => {
     setFilterName(value);
   };
 
-  const handlerQuery = (value) => {
+  const handlerQuery = value => {
     setQuery(value);
   };
 
@@ -99,4 +109,4 @@ export const App = () => {
       </div>
     </div>
   );
-}
+};

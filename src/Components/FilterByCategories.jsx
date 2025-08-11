@@ -1,15 +1,18 @@
-import { Button } from "./Button";
-import cn from "classnames";
+import cn from 'classnames';
+import { Button } from './Button';
 
-export const FilterByCategories = ({ handlerClickGroupBy, selectedCategories }) => {
+export const FilterByCategories = ({
+  handlerClickGroupBy,
+  selectedCategories,
+}) => {
   return (
     <div className="panel-block is-flex-wrap-wrap">
       <Button
         name="All"
         className={cn(
           "button mr-2 my-1",
-          { "is-success": selectedCategories === "All" },
-          { "is-light": selectedCategories !== "All" }
+          { "is-success": selectedCategories.length === 0 },
+          { "is-light": selectedCategories.length > 0 }
         )}
         onClick={(e) => {
           e.preventDefault();
@@ -17,51 +20,54 @@ export const FilterByCategories = ({ handlerClickGroupBy, selectedCategories }) 
         }}
       />
 
-
       <Button
         name="Grocery"
         className={cn(
-          "button mr-2 my-1",
-          { "is-info": selectedCategories === "Grocery" },
-          { "is-light": selectedCategories !== "Grocery" }
+          'button mr-2 my-1',
+          { 'is-info': selectedCategories.includes('Grocery') },
+          { 'is-light': !selectedCategories.includes('Grocery') },
         )}
-        onClick={() => handlerClickGroupBy("Grocery")}
+        onClick={() => handlerClickGroupBy('Grocery')}
       />
+
       <Button
         name="Drinks"
         className={cn(
-          "button mr-2 my-1 is",
-          { "is-info": selectedCategories === "Drinks" },
-          { "is-light": selectedCategories !== "Drinks" }
+          'button mr-2 my-1',
+          { 'is-info': selectedCategories.includes('Drinks') },
+          { 'is-light': !selectedCategories.includes('Drinks') },
         )}
-        onClick={() => handlerClickGroupBy("Drinks")}
+        onClick={() => handlerClickGroupBy('Drinks')}
       />
+
       <Button
         name="Fruits"
         className={cn(
-          "button mr-2 my-1",
-          { "is-info": selectedCategories === "Fruits" },
-          { "is-light": selectedCategories !== "Fruits" }
+          'button mr-2 my-1',
+          { 'is-info': selectedCategories.includes('Fruits') },
+          { 'is-light': !selectedCategories.includes('Fruits') },
         )}
-        onClick={() => handlerClickGroupBy("Fruits")}
+        onClick={() => handlerClickGroupBy('Fruits')}
       />
+
       <Button
         name="Electronics"
         className={cn(
-          "button mr-2 my-1",
-          { "is-info": selectedCategories === "Electronics" },
-          { "is-light": selectedCategories !== "Electronics" }
+          'button mr-2 my-1',
+          { 'is-info': selectedCategories.includes('Electronics') },
+          { 'is-light': !selectedCategories.includes('Electronics') },
         )}
-        onClick={() => handlerClickGroupBy("Electronics")}
+        onClick={() => handlerClickGroupBy('Electronics')}
       />
+
       <Button
         name="Clothes"
         className={cn(
-          "button mr-2 my-1",
-          { "is-info": selectedCategories === "Clothes" },
-          { "is-light": selectedCategories !== "Clothes" }
+          'button mr-2 my-1',
+          { 'is-info': selectedCategories.includes('Clothes') },
+          { 'is-light': !selectedCategories.includes('Clothes') },
         )}
-        onClick={() => handlerClickGroupBy("Clothes")}
+        onClick={() => handlerClickGroupBy('Clothes')}
       />
     </div>
   );

@@ -1,8 +1,15 @@
 import { FilterByCategories } from './FilterByCategories';
 import { FilterByUser } from './FilterByUser';
-import { Input } from "./Input";
+import { Input } from './Input';
 
-export const FilterPanel = ( {handlerClickGroupBy, query, handlerQuery, sortFilterdName, handlerClickName, selectedCategories} ) => {
+export const FilterPanel = ({
+  handlerClickGroupBy,
+  query,
+  handlerQuery,
+  sortFilterdName,
+  handlerClickName,
+  selectedCategories,
+}) => {
   return (
     <div className="block">
       <nav className="panel">
@@ -10,13 +17,15 @@ export const FilterPanel = ( {handlerClickGroupBy, query, handlerQuery, sortFilt
 
         <FilterByUser
           handlerClickName={handlerClickName}
-          sortFilterdName={sortFilterdName}/>
+          sortFilterdName={sortFilterdName}
+        />
 
         <Input query={query} handlerQuery={handlerQuery} />
 
         <FilterByCategories
           handlerClickGroupBy={handlerClickGroupBy}
-          selectedCategories={selectedCategories} />
+          selectedCategories={selectedCategories}
+        />
 
         <div className="panel-block">
           <a
