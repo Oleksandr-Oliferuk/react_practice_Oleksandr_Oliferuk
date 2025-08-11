@@ -2,9 +2,31 @@
 import React from 'react';
 import './App.scss';
 
-// import usersFromServer from './api/users';
-// import categoriesFromServer from './api/categories';
-// import productsFromServer from './api/products';
+import usersFromServer from './api/users';
+import categoriesFromServer from './api/categories';
+import productsFromServer from './api/products';
+import { Table } from './Components/Table';
+import { FilterPanel } from './Components/FilterPanel';
+
+const products = productsFromServer.map(product => {
+  const category = categoriesFromServer.find(
+    c => c.id === product.categoryId
+  );
+
+  const user = usersFromServer.find(
+    u => u.id === category.ownerId
+  );
+
+  return {
+    ...product,
+    categoryTitle: `${category.icon} - ${category.title}`,
+    userName: user.name,
+    userSex: user.sex,
+  };
+});
+
+
+
 
 // const products = productsFromServer.map((product) => {
 //   const category = null; // find by product.categoryId
@@ -18,7 +40,9 @@ export const App = () => (
     <div className="container">
       <h1 className="title">Product Categories</h1>
 
-      <div className="block">
+      <FilterPanel />
+
+      {/* <div className="block">
         <nav className="panel">
           <p className="panel-heading">Filters</p>
 
@@ -69,7 +93,7 @@ export const App = () => (
 
               <span className="icon is-right">
                 {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-                <button
+                {/* <button
                   data-cy="ClearButton"
                   type="button"
                   className="delete"
@@ -129,14 +153,16 @@ export const App = () => (
             </a>
           </div>
         </nav>
-      </div>
+      </div> */}
 
       <div className="box table-container">
         <p data-cy="NoMatchingMessage">
           No products matching selected criteria
         </p>
 
-        <table
+        <Table />
+
+        {/* <table
           data-cy="ProductTable"
           className="table is-striped is-narrow is-fullwidth"
         >
@@ -241,7 +267,7 @@ export const App = () => (
               </td>
             </tr>
           </tbody>
-        </table>
+        </table> */}
       </div>
     </div>
   </div>
